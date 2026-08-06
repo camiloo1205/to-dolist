@@ -39,24 +39,15 @@ def mostrar():
     else:
         print ("===== TAREAS =====")
         for i in range(len(tareas)):
-         fecha_tarea = datetime.date.fromisoformat(tareas[i]["fecha"])
          if tareas[i]["completada"]:
             print( "[X]", i + 1, ".", tareas[i]["tareaGuardada"])
             print( "Tarea completada")
 
          else:
+            fecha_tarea = datetime.date.fromisoformat(tareas[i]["fecha"])
             print( "[ ]", i + 1, ".", tareas[i]["tareaGuardada"])
-            print( "vence: ", tareas[i]["fecha"])
-            hoy = datetime.date.today()
-            diferencia = fecha_tarea - hoy 
-            dias = diferencia.days
-            if dias > 0:
-               print("Faltan:", dias, "días")
-            elif dias == 0:
-               print("la tareas vence hoy")
-            else:
-               print("la tarea vencio hace ", abs(dias), "dias" )
-
+            vencimiento(fecha_tarea)
+            
 def completar():
 
     tareaEditar = int(input("escribe el numero de la tarea que completaste: "))
@@ -112,6 +103,17 @@ def cargar():
 
         with open("pruebas.json", "w") as archivo:
             json.dump(tareas, archivo, indent=4)
+
+def vencimiento(fecha_tarea):
+    hoy = datetime.date.today()
+    diferencia = fecha_tarea - hoy 
+    dias = diferencia.days
+    if dias > 0:
+        print("Faltan:", dias, "días")
+    elif dias == 0:
+        print("la tareas vence hoy")
+    else:
+        print("la tarea vencio hace ", abs(dias), "dias" )  
 
 tareas = []
 ejecutando = True
