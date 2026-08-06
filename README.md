@@ -20,4 +20,4 @@ Aplicación de consola para gestionar tareas.
 
 ## Cómo ejecutar
 
-python main.py
+python To-Dolist.py
